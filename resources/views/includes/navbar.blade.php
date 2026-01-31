@@ -22,7 +22,7 @@
             <li><a href="{{ route('landing') }}" class="{{ request()->routeIs('landing') ? 'text-primary' : '' }} hover:text-gray-600">Beranda</a></li>
             @foreach (\App\Models\NewsCategory::all() as $item)
                 {{-- <li><a href="{{ route('category', $item->slug) }}" class="hover:text-primary">{{ $item->name }}</a></li> --}}
-                <li><a href="" class=" hover:text-gray-600">{{ $item->title }}</a></li>
+                <li><a href="{{ route('news.category', $item->slug) }}" class="{{ request()->routeIs('news.category', $item->slug) ? 'text-primary' : '' }} hover:text-gray-600">{{ $item->title }}</a></li>
             @endforeach
   
           </ul>
