@@ -31,22 +31,23 @@ class AuthorResource extends Resource
     {
           return $schema
         ->schema([
-            Components\TextInput::make('name')
+            Components\Select::make('user_id')
+                ->label('User')
+                ->relationship('user', 'name')
                 ->required()
-                ->maxLength(255),
-
+                ->searchable()
+                ->preload(),               
             Components\TextInput::make('username')
                 ->required()
                 ->maxLength(255),
 
             Components\FileUpload::make('avatar')
                 ->image()
-                ->directory('authors')
+                ->directory('news/authors')
                 ->required(),
 
             Components\RichEditor::make('bio')
-                ->required()
-                ->directory('news/authors'),
+                ->required(),
         ]);
     }
 
@@ -58,7 +59,7 @@ class AuthorResource extends Resource
                     ->label('Avatar')
                     ->circular(),
 
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('user.name')
                     ->label('Name')
                     ->searchable()
                     ->sortable(),

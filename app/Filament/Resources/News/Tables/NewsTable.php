@@ -45,7 +45,7 @@ class NewsTable
                     ->sortable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('author')->relationship('author', 'name') -> label('Author'),
+                // Tables\Filters\SelectFilter::make('user')->relationship('user', 'name') -> label('Author'),
                 Tables\Filters\SelectFilter::make('newsCategory')->relationship('newsCategory', 'title') -> label('Category'),
             ])
             ->recordActions([

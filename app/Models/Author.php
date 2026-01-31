@@ -8,7 +8,7 @@ class Author extends Model
 {
     //
     protected $fillable = [
-        'name',
+        'user_id',
         'username',
         'avatar',
         'bio',
@@ -16,5 +16,8 @@ class Author extends Model
 
     public function News(){
         return $this->hasMany(News::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

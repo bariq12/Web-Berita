@@ -41,7 +41,7 @@
           <p>Berita Unggulan</p>
           <p>Untuk Kamu</p>
         </div>
-        <a href="{{ route('news.show', $featured[0]->slug) }}"
+        <a href="{{ route('news.index') }}"
           class="bg-primary px-5 py-2 rounded-full text-white font-semibold mt-4 md:mt-0 h-fit">
           Lihat Semua
         </a>
@@ -55,7 +55,7 @@
              {{ $featured->newsCategory->title }}</div>
             <img src="{{ asset('storage/' . $featured->thumbnail) }}" alt="" class="w-full rounded-xl mb-3" style="height:150px; object-fit:cover;">
             <p class="font-bold text-base mb-1">{{ $featured->title }}</p>
-            <p class="text-slate-400">{{ $featured->published_at }}</p>
+            <p class="text-slate-400">{{\Carbon\Carbon::parse($featured->published_at)->format('d M Y')}}</p>
           </div>
         </a>
       @endforeach
@@ -81,7 +81,7 @@
             <img src="{{ asset('storage/' . $news[0]->thumbnail) }}" alt="berita1" class="rounded-2xl">
             <p class="font-bold text-xl mt-3">{{ $news[0]->title }}</p>
             <p class="text-slate-400 text-base mt-1">{!! \Str::limit($news[0]->content, 100) !!}</p>
-            <p class="text-slate-400 text-base mt-1">{{ $news[0]->published_at }}</p>
+            <p class="text-slate-400 text-base mt-1">{{\Carbon\Carbon::parse($news[0]->published_at)->format('d M Y')}}</p>
           </a>
         </div>
         @foreach ($news->skip(1) as $newsItem)
@@ -93,6 +93,7 @@
             <div class="mt-2 md:mt-0">
               <p class="font-semibold text-lg">{{ $newsItem->title }}</p>
               <p class="text-slate-400 mt-3 text-sm font-normal">{!! \Str::limit($newsItem->content, 100) !!}</p>
+              <p class="text-slate-400">{{\Carbon\Carbon::parse($newsItem->published_at)->format('d M Y')}}</p>
             </div>
           </a>
         @endforeach
@@ -145,7 +146,7 @@
               {{ $news->newsCategory->title }}</div>
             <img src="{{ asset('storage/' . $news->thumbnail) }}" alt="" class="w-full rounded-xl mb-3" style="height:150px; object-fit:cover;">
             <p class="font-bold text-base mb-1">{{ $news->title }}</p>
-            <p class="text-slate-400">{{ $news->published_at }}</p>
+            <p class="text-slate-400">{{\Carbon\Carbon::parse($news->published_at)->format('d M Y')}}</p>
           </div>
         </a>
         @endforeach

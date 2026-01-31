@@ -17,11 +17,13 @@
                 {{ $item->newsCategory->title }}</div>
               <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="" class="w-full rounded-xl mb-3" style="height: 250px; object-fit:cover;">
               <p class="font-bold text-base mb-1">{{ $item->title }}</p>
-              <p class="text-slate-400">{{ $item->published_at }}</p>
+              <p class="text-slate-400">{{\Carbon\Carbon::parse($item->published_at)->format('d M Y')}}</p>
             </div>
           </a>
          
           @endforeach
+
+        
         </div>
     </div>
 @endsection

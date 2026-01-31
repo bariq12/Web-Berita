@@ -14,4 +14,5 @@ class AuthorController extends Controller
 
         return view('pages.author.show', compact('author'));
     }
+    
 }

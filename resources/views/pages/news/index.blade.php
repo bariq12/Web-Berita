@@ -1,20 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'BRQ News - ' . $author->name)
+@section('title', 'BRQ News - Semua Berita')
 @section('content')
- <!-- Author -->
-    <div class="flex gap-4 items-center mb-10 text-white p-10 bg-cover" style="background-image: url('{{asset('assets/img/bg-profile.png')}}');">
-      <img src="{{ asset('storage/' . $author->avatar) }}" alt="profile" class="rounded-full max-w-28 ">
-      <div class="">
-        <p class="font-bold text-lg">{{ $author->name }}</p>
-        <p>{!! $author->bio !!}</p>
-      </div>
+ <div class="w-full mb-16 bg-[#F6F6F6]">
+      <h1 class="text-center font-bold text-2xl p-24">Semua Berita</h1>
     </div>
 
-    <!-- Berita -->
+       <!-- Berita -->
     <div class=" flex flex-col gap-5 px-4 lg:px-14">
         <div class="grid sm:grid-cols-1 gap-5 lg:grid-cols-4">
-        @foreach ($author->news as $item)
+        @foreach ($news as $item)
           <a href="{{ route('news.show', $item->slug) }}">
             <div
               class="border border-slate-200 p-3 rounded-xl hover:border-primary hover:cursor-pointer transition duration-300 ease-in-out">
@@ -22,12 +17,12 @@
                 {{ $item->newsCategory->title }}</div>
               <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="" class="w-full rounded-xl mb-3" style="height: 250px; object-fit:cover;">
               <p class="font-bold text-base mb-1">{{ $item->title }}</p>
-              <p class="text-slate-400">{{ $item->published_at }}</p>
+              <p class="text-slate-400">{{\Carbon\Carbon::parse($item->published_at)->format('d M Y')}}</p>
             </div>
           </a>
          
           @endforeach
         </div>
+          {{$news->links('vendor.pagination.custom')}}
     </div>
-
 @endsection

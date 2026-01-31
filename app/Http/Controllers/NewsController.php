@@ -6,6 +6,15 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    
+    public function index(Request $request){
+        $search = $request->input('search');
+        $news = \App\Models\News::orderBy('created_at', 'desc')->paginate(10);
+        if ($search) {
+            $news = \App\Models\News::where('title', 'like', "%$search%")->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+        }
+        return view('pages.news.index', compact('news'));
+    }
     public function show($slug){
         $news = \App\Models\News::where('slug', $slug)->firstOrFail();
         $latestNews = \App\Models\News::orderBy('created_at', 'desc')->take(4)->get();
@@ -13,9 +22,7 @@ class NewsController extends Controller
     }
 
     public function category($slug){
-        $category = \App\Models\Category::where('slug', $slug)->firstOrFail();
-        $newsInCategory = \App\Models\News::where('category_id', $category->id)->orderBy('created_at', 'desc')->paginate(10);
-        $latestNews = \App\Models\News::orderBy('created_at', 'desc')->take(4)->get();
-        return view('pages.news.category', compact('category', 'newsInCategory', 'latestNews'));
+        $category = \App\Models\NewsCategory::where('slug', $slug)->firstOrFail();
+        return view('pages.news.category', compact('category'));
     }
 }

@@ -21,7 +21,7 @@
           <!-- Berita Card -->
           <div class=" gap-5 flex flex-col">
           @foreach ($latestNews as $new)
-            <a href="detail-MotoGp.html">
+            <a href="{{ route('news.show', $new->slug) }}">
               <div class="flex gap-3 border border-slate-300 hover:border-primary p-3 rounded-xl">
                 <div class="bg-primary text-white rounded-full w-fit px-5 py-1 ml-2 mt-2 font-normal text-xs absolute">
                   {{ $new->newsCategory->title }}

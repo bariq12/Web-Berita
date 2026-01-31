@@ -13,9 +13,9 @@ class NewsForm
     {
         return $schema
             ->components([
-                Forms\Components\Select::make('author_id')
-                    ->relationship('author', 'name')
-                    ->required(),
+                // Forms\Components\Select::make('user_id')
+                //     ->relationship('users', 'name')
+                //     ->required(),
                 Forms\Components\Select::make('news_category_id')
                     ->relationship('newsCategory', 'title')
                     ->required(),
