@@ -24,6 +24,13 @@ class NewsResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'News';
 
+    public static function getElementQuery() :Builder{
+        if(auth()->user()->isAuthor()){
+            return parent::getEloquentQuery()->where('author_id', auth()->user()->author->id);
+        }
+        return parent::getEloquentQuery();
+    }
+
     public static function form(Schema $schema): Schema
     {
         return NewsForm::configure($schema);

@@ -19,6 +19,17 @@ class BannerResource extends Resource
     protected static ?string $model = Banner::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
+    
+    public static function  canViewAny(): bool
+    {
+        return auth()->user()->isAdmin() === true;
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->isAdmin() === true;
+    }
+
 
     protected static ?string $recordTitleAttribute = 'Banner';
 

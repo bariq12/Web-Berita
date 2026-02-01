@@ -19,7 +19,15 @@ class UserresourceResource extends Resource
     protected static ?string $model = User::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
+      public static function  canViewAny(): bool
+    {
+        return auth()->user()->isAdmin() === true;
+    }
 
+    public static function canCreate(): bool
+    {
+        return auth()->user()->isAdmin() === true;
+    }
     protected static ?string $recordTitleAttribute = 'Users';
 
     public static function form(Schema $schema): Schema

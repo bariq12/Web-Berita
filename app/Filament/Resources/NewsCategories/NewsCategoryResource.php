@@ -23,6 +23,17 @@ class NewsCategoryResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ListBullet;
 
+    public static function  canViewAny(): bool
+    {
+        return auth()->user()->isAdmin() === true;
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->isAdmin() === true;
+    }
+
+
     protected static ?string $recordTitleAttribute = 'News Category';
 
     public static function form(Schema $schema): Schema

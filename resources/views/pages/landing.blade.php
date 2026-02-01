@@ -21,7 +21,7 @@
                 <p class="text-3xl font-semibold text-white mt-1">{{ $banner->news->title }}</p>
                 <div class="flex items-center gap-1 mt-1">
                   <img src={{ asset('storage/' . $banner->news->author->avatar) }} alt="" class="w-5 h-5 rounded-full">
-                  <p class="text-white text-xs">{{ $banner->news->author->name }}</p>
+                  <p class="text-white text-xs">{{ $banner->news->author->user->name }}</p>
                 </div>
               </div>
             </div>
@@ -109,7 +109,7 @@
           <p>Kenali Author</p>
           <p>Terbaik Dari Kami</p>
         </div>
-        <a href="register.html" class="bg-primary px-5 py-2 rounded-full text-white font-semibold mt-4 md:mt-0 h-fit">
+        <a href="{{  route('filament.admin.auth.register') }}" class="bg-primary px-5 py-2 rounded-full text-white font-semibold mt-4 md:mt-0 h-fit">
           Gabung Menjadi Author
         </a>
       </div>
@@ -119,7 +119,7 @@
             <div
               class="flex flex-col items-center border border-slate-200 px-4 py-8 rounded-2xl hover:border-primary hover:cursor-pointer">
               <img src="{{ asset('storage/' . $authoritem->avatar) }}" alt="" class="rounded-full w-24 h-24">
-              <p class="font-bold text-xl mt-4">{{ $authoritem->name }}</p>
+              <p class="font-bold text-xl mt-4">{{ $authoritem->user->name }}</p>
               <p class="text-slate-400">{{ $authoritem->news->count() }} Berita</p>
             </div>
           </a>

@@ -21,10 +21,11 @@ class NewsTable
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('author.name')
+                Tables\Columns\TextColumn::make('author.username')
                     ->label('Author')
                     ->searchable()
                     ->sortable(),
+                   
 
                 Tables\Columns\TextColumn::make('newsCategory.title')
                     ->label('Category')
@@ -42,10 +43,11 @@ class NewsTable
 
                 Tables\Columns\ToggleColumn::make('is_featured')
                     ->label('Featured')
-                    ->sortable(),
+                    ->sortable()
+                    ->visible(fn () => auth()->user()->isAdmin()),
             ])
             ->filters([
-                // Tables\Filters\SelectFilter::make('user')->relationship('user', 'name') -> label('Author'),
+                Tables\Filters\SelectFilter::make('author')->relationship('author', 'username') -> label('Author'),
                 Tables\Filters\SelectFilter::make('newsCategory')->relationship('newsCategory', 'title') -> label('Category'),
             ])
             ->recordActions([

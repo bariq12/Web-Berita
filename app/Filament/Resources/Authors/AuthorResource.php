@@ -25,6 +25,16 @@ class AuthorResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::UserGroup;
 
+    public static function  canViewAny(): bool
+    {
+        return auth()->user()->isAdmin() === true;
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->isAdmin() === true;
+    }
+
     protected static ?string $recordTitleAttribute = 'Author';
 
     public static function form(Schema $schema): Schema
@@ -43,8 +53,9 @@ class AuthorResource extends Resource
 
             Components\FileUpload::make('avatar')
                 ->image()
-                ->directory('news/authors')
-                ->required(),
+                ->required()
+                ->disk('public')              // pakai disk public
+                ->directory('news/authors') ,
 
             Components\RichEditor::make('bio')
                 ->required(),

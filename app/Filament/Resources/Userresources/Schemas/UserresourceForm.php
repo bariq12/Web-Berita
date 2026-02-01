@@ -33,11 +33,16 @@ class UserresourceForm
                     ->dehydrated(fn($state) => !empty($state)) 
                     ->dehydrateStateUsing(fn($state) => bcrypt($state))
                     ->maxLength(255),
-                Forms\Components\Toggle::make('email_verified')
-                    ->label('Email Verified')
-                    ->onIcon('heroicon-o-check-circle')
-                    ->offIcon('heroicon-o-x-circle')
-                    ->default(false),
+            //   Forms\Components\Toggle::make('email_verified')
+            //         ->label('Email Verified')
+            //         ->onIcon('heroicon-o-check-circle')
+            //         ->offIcon('heroicon-o-x-circle')
+            //         ->afterStateHydrated(fn ($state, Forms\Set $set) =>
+            //             $set('email_verified_at', ! is_null($state))
+            //         )
+            //         ->dehydrateStateUsing(fn (bool $state) =>
+            //             $state ? now() : null
+            //         ),
             ]);
     }
 }

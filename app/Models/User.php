@@ -49,4 +49,13 @@ class User extends Authenticatable
     public function Author(){
         return $this->hasOne(Author::class);
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+    public function isAuthor(): bool
+    {
+        return $this->role === 'author';
+    }
 }

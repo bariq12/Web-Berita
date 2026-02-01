@@ -11,6 +11,7 @@ use Filament\Forms\Components;
 use Filament\Actions;
 
 
+
 class UserresourcesTable
 {
     public static function configure(Table $table): Table
@@ -27,11 +28,28 @@ class UserresourcesTable
                     ->sortable(),
                 Tables\Columns\TextColumn::make('role')
                     ->label('Role')
-                    ->searchable()
+                    ->badge()
+                    ->colors([
+                        'admin' => 'danger',
+                        'author' => 'primary',
+                    ])
                     ->sortable(),
-                Tables\Columns\ToggleColumn::make('email_verified')
-                    ->label('Email Verified')
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('author.username')
+                    ->label('username')
+                    ->sortable(),   
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('dibuat pada')
+                    ->dateTime('d-M-Y H:i')
+                    ->sortable(),   
+                // Tables\Columns\ToggleColumn::make('email_verified')
+                //     //  ->label('Email Verified')
+                //     // ->sortable()
+                //     // ->getStateUsing(fn ($state) => ! is_null($state))
+                //     // ->updateStateUsing(function ($record, bool $state) {
+                //     //     $record->update([
+                //     //         'email_verified_at' => $state ? now() : null,
+                //     //     ]);
+                //     // }),
 
             ])
             ->filters([

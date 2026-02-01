@@ -5,7 +5,8 @@ namespace App\Filament\Resources\News\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Forms;
 use Filament\Forms\Components;
-use Illuminate\Support\Str; 
+use Illuminate\Support\Str;
+use Filament\Tables; 
 
 class NewsForm
 {
@@ -13,9 +14,14 @@ class NewsForm
     {
         return $schema
             ->components([
-                // Forms\Components\Select::make('user_id')
-                //     ->relationship('users', 'name')
-                //     ->required(),
+                Forms\Components\Select::make('author_id')
+                    ->relationship('author', 'username')
+                    ->required()
+                   ->disabled(fn () => auth()->user()->isAuthor())
+                    ->default(fn () => auth()->user()->isAuthor() 
+                        ? auth()->user()->author?->id 
+                        : null
+                    ),
                 Forms\Components\Select::make('news_category_id')
                     ->relationship('newsCategory', 'title')
                     ->required(),
@@ -40,7 +46,8 @@ class NewsForm
                     ->required(),
                 Forms\Components\Toggle::make('is_featured')
                     ->label('Featured News')
-                    ->default(false),
+                    ->default(false)
+                    ->visible(fn () => auth()->user()->isAdmin()),
                 ]);
     }
 }
